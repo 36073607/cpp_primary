@@ -1,25 +1,25 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
-//º¯ÊýÖ¸Õë»ù´¡ÖªÊ¶
+//å‡½æ•°æŒ‡é’ˆåŸºç¡€çŸ¥è¯†
 
-//1.»ñÈ¡º¯ÊýµÄµØÖ·£º
-//Ö»ÐèÊ¹ÓÃº¯ÊýÃû(ºóÃæ²»¸ú²ÎÊý)¼´¿É   eg:func()ÊÇÒ»¸öº¯Êý£¬Ôòfunc¾ÍÊÇ¸Ãº¯ÊýµÄµØÖ·
-//×¢£ºÇø·Ö´«µÝµÄÊÇº¯ÊýµÄµØÖ·»¹ÊÇº¯ÊýµÄ·µ»ØÖµ
-//process(func);  ÕâÀï´«µÝµÄÊÇº¯Êýfunc()µÄµØÖ·
-//process(func());  ÕâÀï´«µÝµÄÊÇº¯Êýfunc()µÄ·µ»ØÖµ
+//1.èŽ·å–å‡½æ•°çš„åœ°å€ï¼š
+//åªéœ€ä½¿ç”¨å‡½æ•°å(åŽé¢ä¸è·Ÿå‚æ•°)å³å¯   eg:func()æ˜¯ä¸€ä¸ªå‡½æ•°ï¼Œåˆ™funcå°±æ˜¯è¯¥å‡½æ•°çš„åœ°å€
+//æ³¨ï¼šåŒºåˆ†ä¼ é€’çš„æ˜¯å‡½æ•°çš„åœ°å€è¿˜æ˜¯å‡½æ•°çš„è¿”å›žå€¼
+//process(func);  è¿™é‡Œä¼ é€’çš„æ˜¯å‡½æ•°func()çš„åœ°å€
+//process(func());  è¿™é‡Œä¼ é€’çš„æ˜¯å‡½æ•°func()çš„è¿”å›žå€¼
 
-//2.ÉùÃ÷º¯ÊýÖ¸Õë
-//ÉùÃ÷º¯ÊýÖ¸ÕëÓ¦Ö¸¶¨º¯ÊýµÄ·µ»ØÀàÐÍºÍ²ÎÊýÁÐ±í
-//eg: double pam(int);  ÕâÊÇº¯ÊýÔ­ÐÍ
-//    double (*pf)(int);  ÕâÊÇº¯ÊýÖ¸Õë
-//¸öÈË×Ü½á£º°Ñº¯ÊýµÄ·µ»ØÀàÐÍºÍ²ÎÊýÁÐ±íµ±×÷ÀàËÆÊý¾ÝÀàÐÍµÄ¶«Î÷£¬ÆäÓà¸ú´´½¨Õý³£Ö¸Õë±äÁ¿Ò»ÖÂ
+//2.å£°æ˜Žå‡½æ•°æŒ‡é’ˆ
+//å£°æ˜Žå‡½æ•°æŒ‡é’ˆåº”æŒ‡å®šå‡½æ•°çš„è¿”å›žç±»åž‹å’Œå‚æ•°åˆ—è¡¨
+//eg: double pam(int);  è¿™æ˜¯å‡½æ•°åŽŸåž‹
+//    double (*pf)(int);  è¿™æ˜¯å‡½æ•°æŒ‡é’ˆ
+//ä¸ªäººæ€»ç»“ï¼šæŠŠå‡½æ•°çš„è¿”å›žç±»åž‹å’Œå‚æ•°åˆ—è¡¨å½“ä½œç±»ä¼¼æ•°æ®ç±»åž‹çš„ä¸œè¥¿ï¼Œå…¶ä½™è·Ÿåˆ›å»ºæ­£å¸¸æŒ‡é’ˆå˜é‡ä¸€è‡´
 //int* p;
-//double (*pf)(int);  ÕâÀï°ÑdoubleºÍ(int)¿´×÷Ò»¸öÕûÌå£¬ÊÓÎªÒ»ÖÖÀàÐÍ£¬*pf¾ÍÊÇÕâÖÖÀàÐÍÏÂµÄÖ¸Õë±äÁ¿
+//double (*pf)(int);  è¿™é‡ŒæŠŠdoubleå’Œ(int)çœ‹ä½œä¸€ä¸ªæ•´ä½“ï¼Œè§†ä¸ºä¸€ç§ç±»åž‹ï¼Œ*pfå°±æ˜¯è¿™ç§ç±»åž‹ä¸‹çš„æŒ‡é’ˆå˜é‡
 
-//3.Ê¹ÓÃÖ¸ÕëÀ´µ÷ÓÃº¯Êý
-//(*pf)°çÑÝµÄ½ÇÉ«Óëº¯ÊýÃûÏàÍ¬£¬Òò´ËÊ¹ÓÃ(*pf)Ê±£¬Ö»Ðè½«Ëü¿´×÷º¯ÊýÃû¼´¿É
-//(*pf)ÊÇº¯Êý£¬pf¾ÍÊÇº¯ÊýÖ¸Õë
+//3.ä½¿ç”¨æŒ‡é’ˆæ¥è°ƒç”¨å‡½æ•°
+//(*pf)æ‰®æ¼”çš„è§’è‰²ä¸Žå‡½æ•°åç›¸åŒï¼Œå› æ­¤ä½¿ç”¨(*pf)æ—¶ï¼Œåªéœ€å°†å®ƒçœ‹ä½œå‡½æ•°åå³å¯
+//(*pf)æ˜¯å‡½æ•°ï¼Œpfå°±æ˜¯å‡½æ•°æŒ‡é’ˆ
 void func(int a)
 {
 	return;
@@ -27,25 +27,25 @@ void func(int a)
 int main()
 {
 	int a = 0;
-	//·½·¨Ò»
-	void (*pf1)(int) = func;//´´½¨ÁËÒ»¸öº¯ÊýÖ¸Õëpf1²¢³õÊ¼»¯
+	//æ–¹æ³•ä¸€
+	void (*pf1)(int) = func;//åˆ›å»ºäº†ä¸€ä¸ªå‡½æ•°æŒ‡é’ˆpf1å¹¶åˆå§‹åŒ–
 	func(a);
-	(*pf1)(a);//µ÷ÓÃº¯Êý
+	(*pf1)(a);//è°ƒç”¨å‡½æ•°
 
-	//·½·¨¶þ
-	void (*pf2)(int);//´´½¨ÁËÒ»¸öº¯ÊýÖ¸Õë
-	pf2 = func;//³õÊ¼»¯
-	(*pf2)(a);//µ÷ÓÃº¯Êý
-	pf2(a);//µ÷ÓÃº¯Êý
+	//æ–¹æ³•äºŒ
+	void (*pf2)(int);//åˆ›å»ºäº†ä¸€ä¸ªå‡½æ•°æŒ‡é’ˆ
+	pf2 = func;//åˆå§‹åŒ–
+	(*pf2)(a);//è°ƒç”¨å‡½æ•°
+	pf2(a);//è°ƒç”¨å‡½æ•°
 
-	//ÓÉÓÚÀúÊ·ÓëÂß¼­Ô­Òò
-	//ÕâÀïµÄ pf2 ºÍ (*pf2) µÈ¼Û
+	//ç”±äºŽåŽ†å²ä¸Žé€»è¾‘åŽŸå› 
+	//è¿™é‡Œçš„ pf2 å’Œ (*pf2) ç­‰ä»·
 
 	return 0;
 }
 
 
-//ÉîÈëÌ½ÌÖº¯ÊýÖ¸Õë
+//æ·±å…¥æŽ¢è®¨å‡½æ•°æŒ‡é’ˆ
 const double* f1(const double* arr, int sz)
 {
 	return arr;
@@ -70,16 +70,16 @@ int main()
 	//const double* (*p2)(const double*, int) = f2;
 	cout << "Address\tvalue\n";
 	cout << (*p1)(array, 3) << "\t" << *((*p1)(array, 3)) << endl;
-	cout << p1(array, 3) << "\t" << *(p1(array, 3)) << endl;//µ÷ÓÃº¯ÊýÊ±p1Óë(*p1)µÈ¼Û
+	cout << p1(array, 3) << "\t" << *(p1(array, 3)) << endl;//è°ƒç”¨å‡½æ•°æ—¶p1ä¸Ž(*p1)ç­‰ä»·
 	cout << p2(array, 3) << "\t" << *(p2(array, 3)) << endl;
 
 
-	const double* (*pa[3])(const double*, int) = { f1,f2,f3 };//Àà±Èint* pa[3] = {p1,p2,p3};
-	//[]ÓÅÏÈ¼¶±È*¸ß
-	//ÓÃÒ»´Î[]Ïàµ±ÓÚ½âÒýÓÃ(*)Ò»´Î
+	const double* (*pa[3])(const double*, int) = { f1,f2,f3 };//ç±»æ¯”int* pa[3] = {p1,p2,p3};
+	//[]ä¼˜å…ˆçº§æ¯”*é«˜
+	//ç”¨ä¸€æ¬¡[]ç›¸å½“äºŽè§£å¼•ç”¨(*)ä¸€æ¬¡
 	auto pb = pa;
 	//const double* (*(*pb))(const double*, int) = pa;
-	//paÊÇº¯ÊýÖ¸ÕëÊý×éÃû£¬*pb¶ÔÓ¦pa£¬*(*pb)¶ÔÓ¦Êý×éÖÐµÄÔªËØ----º¯ÊýµØÖ·    (*pf)=func;
+	//paæ˜¯å‡½æ•°æŒ‡é’ˆæ•°ç»„åï¼Œ*pbå¯¹åº”paï¼Œ*(*pb)å¯¹åº”æ•°ç»„ä¸­çš„å…ƒç´ ----å‡½æ•°åœ°å€    (*pf)=func;
 	cout << "Address\tvalue\n";
 	for (int i = 0; i < 3; i++)
 	{
@@ -93,19 +93,21 @@ int main()
 	}
 
 
-	auto pc = &pa;//&paÊÇÕû¸öÊý×éµÄµØÖ·
-	//pa±¾¾ÍÊÇÒ»¸ö¶þ¼¶Ö¸Õë£¬½«paµÄµØÖ·¸øpc,ÔòpcÊÇÈý¼¶Ö¸Õë
+	auto pc = &pa;//&paæ˜¯æ•´ä¸ªæ•°ç»„çš„åœ°å€
+	//paæœ¬å°±æ˜¯ä¸€ä¸ªäºŒçº§æŒ‡é’ˆï¼Œå°†paçš„åœ°å€ç»™pc,åˆ™pcæ˜¯ä¸‰çº§æŒ‡é’ˆ
 	//
 	//const double* (*(*pc)[3])(const double*, int) = &pa;
-	// (*pc[3])¶ÔÓ¦ &pa  ,*(*pc)[3]¶ÔÓ¦Êý×éÖÐµÄÔªËØ----º¯ÊýÃû
-	//×¢£º
-	//*pd[3]  ÊÇÒ»¸öÓÐÈý¸öÖ¸ÕëµÄÊý×é
-	//(*pd)[3]  ÊÇÒ»¸öÖ¸ÏòÓµÓÐÈý¸öÔªËØµÄÊý×éµÄÖ¸Õë
+	// (*pc[3])å¯¹åº” &pa  ,*(*pc)[3]å¯¹åº”æ•°ç»„ä¸­çš„å…ƒç´ ----å‡½æ•°å
+	//æ³¨ï¼š
+	//*pd[3]  æ˜¯ä¸€ä¸ªæœ‰ä¸‰ä¸ªæŒ‡é’ˆçš„æ•°ç»„
+	//(*pd)[3]  æ˜¯ä¸€ä¸ªæŒ‡å‘æ‹¥æœ‰ä¸‰ä¸ªå…ƒç´ çš„æ•°ç»„çš„æŒ‡é’ˆ
 	cout << "Address\tvalue\n";
 	for (int i = 0; i < 3; i++)
 	{
 		cout << (*pc)[i](array, 3) << "\t" << *(*pc)[i](array, 3) << endl;
+		//cout << (*((*pc)[i]))(array, 3) << "\t" << *(*((*pc)[i]))(array, 3) << endl;
 	}
 
 	return 0;
+
 }
